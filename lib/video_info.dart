@@ -17,9 +17,9 @@ class _VideoSongState extends State<VideoSong> {
   List videoInfo=[];
   bool _playArea=false;
   bool _isPlaying=false;
-  //bool _disposed=false;
-  late VideoPlayerController _controller;
-
+  bool _disposed=false;  //use for free/release previous video cache memory.
+  int _isPlayingIndex=-1;
+  VideoPlayerController? _controller;
 
   _initData(){
     DefaultAssetBundle.of(context).loadString("json/video_info.json").then((value){
@@ -36,15 +36,15 @@ class _VideoSongState extends State<VideoSong> {
     _initData();
   }
 
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   _disposed=true;
-  //   _controller?.pause();
-  //   _controller?.dispose();
-  //   _controller=null;
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _disposed=true;
+    _controller?.pause();
+    _controller?.dispose();
+    _controller=null;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _VideoSongState extends State<VideoSong> {
       home: Scaffold(
         body: SafeArea(
           child: Container(
-            padding: EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 10),
             decoration:
             _playArea==false?
             BoxDecoration(
@@ -288,19 +288,21 @@ class _VideoSongState extends State<VideoSong> {
     );
   }
 
-  //var _onUpdateControllerTime=0;
+  var _onUpdateControllerTime=0;
   void __onControllerUpdate(){
 
-    // if(_disposed){
-    //   return;
-    // }
+    //if previous video resources already free then no need to call this method.
+    if(_disposed){
+      return;
+    }
 
-    // _onUpdateControllerTime=0;
-    // final now=DateTime.now().microsecondsSinceEpoch;
-    // if(_onUpdateControllerTime>now){
-    //   return;
-    // }
-    // _onUpdateControllerTime=now+500;
+    _onUpdateControllerTime=0;
+    final now=DateTime.now().microsecondsSinceEpoch;
+    if(_onUpdateControllerTime>now){
+      return;
+    }
+
+    _onUpdateControllerTime=now+500;
 
     final controller=_controller;
     if(controller==null){
@@ -318,21 +320,22 @@ class _VideoSongState extends State<VideoSong> {
   _onTapVideo(int index){
     //when i click on video widget then this controller is initialized.
     final controller=VideoPlayerController.network(videoInfo[index]["videoUrl"]);
-    // final previousController=_controller;
-    //
+    final VideoPlayerController? previousVideoController=_controller;
+
     _controller=controller;
-    //
-    // if(previousController!=null){
-    //   previousController.removeListener(__onControllerUpdate);
-    //   previousController.pause();
-    // }
+
+    if(previousVideoController!=null){
+      previousVideoController.removeListener(__onControllerUpdate);
+      previousVideoController.pause();
+    }
 
     setState((){
     });
 
     // ignore: avoid_single_cascade_in_expression_statements
     controller..initialize().then((_){
-      //previousController?.dispose();
+      _isPlayingIndex=index;
+      previousVideoController?.dispose();
       controller.addListener(__onControllerUpdate);
       controller.play(); //when video is initialized then automatically video is played.
       setState((){
@@ -345,14 +348,14 @@ class _VideoSongState extends State<VideoSong> {
   Widget _playVideo(BuildContext context){
     final controller=_controller;
 
-    final temp=controller.value.isInitialized;
-    if(temp){
+    final temp=controller?.value.isInitialized;
+    if(temp!){
       return AspectRatio(
         aspectRatio: 16/9,
         child: Container(
           height: 300,
           width: 300,
-          child: VideoPlayer(controller),
+          child: VideoPlayer(controller!),
         ),
       );
     }else{
@@ -368,7 +371,12 @@ class _VideoSongState extends State<VideoSong> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // ignore: deprecated_member_use
-          FlatButton(onPressed: (){
+          FlatButton(onPressed: () async{
+            final index=_isPlayingIndex-1;
+            // ignore: prefer_is_empty
+            if(index>=0 && videoInfo.length>=0){
+              _onTapVideo(index);
+            }
 
           }, child:const Icon(Icons.fast_rewind,size: 25,color: Colors.white,)),
           // ignore: deprecated_member_use
@@ -377,16 +385,21 @@ class _VideoSongState extends State<VideoSong> {
               setState((){
                 _isPlaying=false;
               });
-              _controller.pause();
+              _controller?.pause();
             }else{
               setState((){
                 _isPlaying=true;
               });
-              _controller.play();
+              _controller?.play();
             }
           }, child:Icon(_isPlaying?Icons.pause:Icons.play_arrow,size: 25,color: Colors.white,)),
           // ignore: deprecated_member_use
-          FlatButton(onPressed: () {
+          FlatButton(onPressed: () async {
+            final index=_isPlayingIndex+1;
+            // ignore: prefer_is_empty
+            if(index>=0 && videoInfo.length>=0){
+              _onTapVideo(index);
+            }
           }, child:const Icon(Icons.fast_forward,size: 25,color: Colors.white,)),
         ],
       ),
