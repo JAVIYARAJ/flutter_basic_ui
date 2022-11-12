@@ -76,7 +76,7 @@ class _MainPageState extends State<MainPage> {
                     const SizedBox(width: 10,),
                     GestureDetector(
                         onTap: (){
-                          Get.to(const VideoSong());
+                          Get.to(const VideoInfo());
                         },
                         child: const Icon(Icons.arrow_forward))
                   ],

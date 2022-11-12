@@ -5,16 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
-import 'main_page.dart';
-
-class VideoSong extends StatefulWidget {
-  const VideoSong({Key? key}) : super(key: key);
+class VideoInfo extends StatefulWidget {
+  const VideoInfo({Key? key}) : super(key: key);
 
   @override
-  State<VideoSong> createState() => _VideoSongState();
+  State<VideoInfo> createState() => _VideoInfoState();
 }
 
-class _VideoSongState extends State<VideoSong> {
+class _VideoInfoState extends State<VideoInfo> {
 
   List videoInfo=[];
   bool _playArea=false;
