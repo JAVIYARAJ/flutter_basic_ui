@@ -76,8 +76,7 @@ class _MainPageState extends State<MainPage> {
                     const SizedBox(width: 10,),
                     GestureDetector(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const VideoSong()));
-
+                          Get.to(const VideoSong());
                         },
                         child: const Icon(Icons.arrow_forward))
                   ],
