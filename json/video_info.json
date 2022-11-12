@@ -1,0 +1,21 @@
+[
+  {
+    "title": "squat and walk",
+    "time": "45 seconds",
+    "thumbnail": "assets/squat1.jpg",
+    "videoUrl": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4"
+  },
+  {
+    "title": "plie squat and Heel Raises",
+    "time": "55 seconds",
+    "thumbnail": "assets/squat1.jpg",
+    "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+  },
+  {
+    "title": "Squat Kickback",
+    "time": "60 seconds",
+    "thumbnail": "assets/squat1.jpg",
+    "videoUrl": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4"
+  }
+
+]
