@@ -1,4 +1,4 @@
-# traning_app
+# training_app
 
 A new Flutter project.
 
