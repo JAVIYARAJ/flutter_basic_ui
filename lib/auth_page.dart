@@ -20,13 +20,13 @@ class _AuthPageState extends State<AuthPage> {
             color: Colors.white,
             margin: const EdgeInsets.only(left: 10,right: 10),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 50,),
                 const Image(image: AssetImage("assets/login_page_image.jpg"),fit: BoxFit.cover,),
                 const SizedBox(height: 50,),
                 const Text("Get stronger and fitter with us.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-                const SizedBox(height: 20,),
+                const SizedBox(height: 50,),
                 const Text("Create your Account",style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal,color: Colors.black26),),
                 const SizedBox(height: 50,),
                 Padding(

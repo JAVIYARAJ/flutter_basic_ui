@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:traning_app/auth_page.dart';
 import 'package:traning_app/main_page.dart';
-import 'package:traning_app/signUp_page.dart';
 class AuthDashboard extends StatelessWidget {
 
   const AuthDashboard({Key? key}) : super(key: key);

@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:traning_app/user.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoInfo extends StatefulWidget {
@@ -34,6 +35,8 @@ class _VideoInfoState extends State<VideoInfo> {
     // TODO: implement initState
     super.initState();
     _initData();
+    //final ans=readVideoList();
+    //debugPrint("video ans is $ans");
   }
 
   @override
@@ -44,6 +47,87 @@ class _VideoInfoState extends State<VideoInfo> {
     _controller?.dispose();
     _controller=null;
     super.dispose();
+  }
+
+
+  Widget _buildWidget(VideoModel videoModel){
+    return Container(
+      margin: const EdgeInsets.only(top: 5,bottom: 5),
+      height: 120,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(
+                    left: 5
+                ),
+                height: 80,
+                width: 80
+                ,decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: const DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage("assets/play_icon.png"))
+              ),
+              ),
+              const SizedBox(width: 30,),
+              Container(
+                height: 80,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start
+                  ,children: [
+                  Text(videoModel.title,style:const TextStyle(fontSize: 20,color: Colors.black),),
+                  const SizedBox(height: 10,),
+                  Text(videoModel.title,style:const TextStyle(fontSize: 15,color: Colors.black26),),
+                ],
+                ),
+              )
+            ],
+          ),
+          const SizedBox(height: 10,),
+          Row(
+            children: [
+              Container(
+                width: 80,
+                height: 20
+                ,decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(20)
+              ),
+                child: const Center(
+                  child: Text("25s rest",style: TextStyle(color: Colors.white),),
+                ),
+              ),
+              Row(
+                children:List.generate(36, (index){
+                  return Container(
+                      margin: const EdgeInsets.only(left: 2,right: 2),
+                      height: 1,
+                      width: 3,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [Colors.cyan.withOpacity(0.7),Colors.blueAccent.withOpacity(0.7)],
+                        ),
+                      ));
+                }),
+              )
+
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   @override

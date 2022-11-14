@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:traning_app/auth_dashboard.dart';
+import 'package:traning_app/auth_page.dart';
 import 'package:traning_app/main_page.dart';
 import 'package:traning_app/signUp_page.dart';
 class SplashScreen extends StatefulWidget {
@@ -25,8 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 5),(){
       // Get.to(()=>const MainPage(),
       //     transition: Transition.fade,duration: const Duration(seconds: 2));
-    
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const SignUpPage()));
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const AuthDashboard()));
     });
   }
 

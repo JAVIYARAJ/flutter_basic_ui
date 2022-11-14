@@ -205,6 +205,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             const SizedBox(height: 15,),
+            const Text("Area of focus",style: TextStyle(color: Colors.black,fontSize: 20),),
             Expanded(child: GridView.count(
               crossAxisCount: 2, children:
             List.generate(info.length, (index){
