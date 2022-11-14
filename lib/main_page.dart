@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:traning_app/video_info.dart';
 
+import 'google_auth.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -26,7 +28,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   @override
-  void initState() {
+  void initState(){
     // TODO: implement initState
     super.initState();
     _initData();
@@ -34,38 +36,36 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+
+     final user=FirebaseAuth.instance.currentUser;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
         margin: const EdgeInsets.only(top: 50,left: 10,right: 10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children:[
                 const Text("Training",style: TextStyle(color: Colors.black,fontSize: 25,fontWeight: FontWeight.bold),),
-                Row(
-                  children: const [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Icon(Icons.arrow_back_ios_sharp,size: 20,),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Icon(Icons.calendar_today,size: 20,),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Icon(Icons.arrow_forward_ios_sharp,size: 20,),
-                    SizedBox(
-                      width: 5,
-                    ),
-                  ],
-                )
+                InkWell(
+                  onTap: (){
+                    GoogleSignProvider().logout();
+                  },
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundImage: NetworkImage(user?.photoURL??"https://static-media-prod-cdn.itsre-sumo.mozilla.net/static/default-FFA-avatar.2f8c2a0592bda1c5.png"),
+                  ),
+                ),
               ],
             ),
-            const SizedBox(height: 30,),
+            const SizedBox(height: 20,),
+            Text("welcome ${user?.displayName}"??"Name",style: const TextStyle(fontSize: 20,color: Colors.black26,fontWeight: FontWeight.bold),),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -238,7 +238,6 @@ class _MainPageState extends State<MainPage> {
               );
             })
               ,))
-
           ],
         ),
       ),

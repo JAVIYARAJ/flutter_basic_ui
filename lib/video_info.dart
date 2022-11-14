@@ -131,7 +131,6 @@ class _VideoInfoState extends State<VideoInfo> {
                           ),
                         ],
                       ),
-
                     ],
                   ),
                 ):Column(
@@ -298,7 +297,6 @@ class _VideoInfoState extends State<VideoInfo> {
       ),
     );
   }
-
 
   var _onUpdateControllerTime=0;
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "704841991247",
+    "project_id": "training-app-6c520",
+    "storage_bucket": "training-app-6c520.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704841991247:android:c5049d15d6a4834937163a",
+        "android_client_info": {
+          "package_name": "com.example.traning_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704841991247-0f7c0mf0mp3kq0kh4r7q74sq8c68t68e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACWdbkNQaLVMHgwUF7NJsyokH8ivi2juM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704841991247-0f7c0mf0mp3kq0kh4r7q74sq8c68t68e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
