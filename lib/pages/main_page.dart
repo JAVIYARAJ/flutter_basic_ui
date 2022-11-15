@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:traning_app/video_info.dart';
+import 'package:traning_app/pages/video_info_page.dart';
 
-import 'google_auth.dart';
+import '../auth/google_auth.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -62,7 +62,7 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
             const SizedBox(height: 20,),
-            Text("welcome ${user?.displayName}"??"Name",style: const TextStyle(fontSize: 20,color: Colors.black26,fontWeight: FontWeight.bold),),
+            Text("welcome ${user?.displayName}",style: const TextStyle(fontSize: 20,color: Colors.black26,fontWeight: FontWeight.bold),),
             const SizedBox(
               height: 20,
             ),
@@ -173,7 +173,7 @@ class _MainPageState extends State<MainPage> {
                     decoration: const BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: AssetImage("assets/excercise_image1.png")
+                            image: AssetImage("assets/excercise_card_icon.png")
                         )
                     ),
                   ),
@@ -205,7 +205,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             const SizedBox(height: 15,),
-            const Text("Area of focus",style: TextStyle(color: Colors.black,fontSize: 20),),
+            const Text("Area of focus",style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.normal),),
             Expanded(child: GridView.count(
               crossAxisCount: 2, children:
             List.generate(info.length, (index){

@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:traning_app/auth_dashboard.dart';
-import 'package:traning_app/auth_page.dart';
-import 'package:traning_app/main_page.dart';
-import 'package:traning_app/signUp_page.dart';
+import 'package:traning_app/auth/auth_dashboard.dart';
+import 'package:traning_app/auth/auth_page.dart';
+import 'package:traning_app/pages/main_page.dart';
+import 'package:traning_app/auth/signUp_page.dart';
 class SplashScreen extends StatefulWidget {
 
   const SplashScreen({Key? key}) : super(key: key);
