@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:traning_app/user.dart';
+import 'package:traning_app/model/user.dart';
 class VideoSample extends StatelessWidget {
   const VideoSample({Key? key}) : super(key: key);
 

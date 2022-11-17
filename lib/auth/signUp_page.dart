@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:traning_app/user.dart';
+import 'package:traning_app/model/user.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -95,7 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
               alignment: Alignment.center,
               child: InkWell(
                 onTap: () async{
-                  await _createUser(User(name: name, email: email, password: password));
+                  await _createUser(Temp(name: name, email: email, password: password));
                 },
                 child: Container(
                   height: 50,
@@ -136,7 +136,7 @@ class _SignUpPageState extends State<SignUpPage> {
 }
 
 
-_createUser(User user) async {
+_createUser(Temp user) async {
 
   if(user.name.isNotEmpty && user.email.isNotEmpty && user.password.isNotEmpty){
   final firebase=FirebaseFirestore.instance.collection("videoList");

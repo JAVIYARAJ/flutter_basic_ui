@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:traning_app/widget/reusable_button.dart';
+import 'package:get/get.dart';
+
+import '../../model/user_type.dart';
+import '../../state/state_controller.dart';
+import '../../widget/reusable_top_back_pannel.dart';
 
 class ExerciseFocusArea extends StatefulWidget {
   const ExerciseFocusArea({Key? key}) : super(key: key);
@@ -10,17 +15,27 @@ class ExerciseFocusArea extends StatefulWidget {
 
 class _ExerciseFocusAreaState extends State<ExerciseFocusArea> {
 
+
   List<String> exerciseType=["FULL BODY","ARM","CHEST","ABS","LEG"];
 
   Map<String,bool> selectedExerciseType ={"FULL BODY":false,"ARM":false,"CHEST":false,"ABS":false,"LEG":false};
 
-  bool fullBodyIsSelected=true;
+  bool fullBodyIsSelected=false;
   bool otherExerciseIsSelected=false;
+
+  var userType=Get.arguments["userType"];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
 
     return MaterialApp(
+      color: Colors.white,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SafeArea(
@@ -30,18 +45,11 @@ class _ExerciseFocusAreaState extends State<ExerciseFocusArea> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                        onTap: (){
-                          Navigator.pop(context);
-                        },
-                        child: const Icon(Icons.arrow_back,color: Colors.black,size: 30,)),
-                    const Text("Skip",style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),)
-                  ],
-                ),
+                ReusableTopBackPanel(backOnTap: (){
+                  Get.back();
+                },skipOnTap: (){
+
+                },),
                 const SizedBox(height: 30,),
                 const Text("PLEASE CHOOSE YOUR",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 25),),
                 const Text("FOCUS AREA",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 25),),
@@ -59,8 +67,11 @@ class _ExerciseFocusAreaState extends State<ExerciseFocusArea> {
                 ),
                 Expanded(child: Container()),
                 ReusableNextButton(buttonName: "NEXT",onTap: (){
-
-                },)
+                    // if(selectedExerciseType.isEmpty){
+                    //   Get.snackbar("Exercise Focus Area","Please Select Your Focus Area",backgroundColor: Colors.blueAccent.withOpacity(0.4));
+                    // }
+                  Get.toNamed("/exercise_goal_page");
+                },bottomMargin: 10,topMargin: 0,)
               ],
             ),
           ),
@@ -84,10 +95,12 @@ class _ExerciseFocusAreaState extends State<ExerciseFocusArea> {
   Widget _rightFocusAreaWidget()=>Container(
     height: 350,
     width: 150,
-    decoration: const BoxDecoration(
+    decoration:BoxDecoration(
       image: DecorationImage(
         fit: BoxFit.cover,
-        image: AssetImage("assets/focus_area_icon.jpg")
+        image: AssetImage(
+          userType==User.MALE ? "assets/male_focus_area_icon.jpg": "assets/female_focus_area_icon.png"
+        )
       )
     ),
   );
@@ -96,17 +109,15 @@ class _ExerciseFocusAreaState extends State<ExerciseFocusArea> {
     onTap: (){
       setState((){
         if(index==0){
+          for(int i=1;i<selectedExerciseType.length;i++){
+            selectedExerciseType[exerciseType[i]]=false;
+          }
           fullBodyIsSelected=!fullBodyIsSelected;
           selectedExerciseType[exerciseType[0]]=fullBodyIsSelected;
         }else{
-          if(fullBodyIsSelected==false){
-            selectedExerciseType[exerciseType[index]]=!selectedExerciseType[exerciseType[index]]!;
-            if(selectedExerciseType[exerciseType[index]]==true){
-              otherExerciseIsSelected=true;
-            }
-          }
+          fullBodyIsSelected=false;
+          selectedExerciseType[exerciseType[index]]=!selectedExerciseType[exerciseType[index]]!;
         }
-        debugPrint(selectedExerciseType.toString());
       });
     },
     child: Container(
@@ -120,7 +131,7 @@ class _ExerciseFocusAreaState extends State<ExerciseFocusArea> {
           ) : Border.all(
               width: 2,
               color:
-              selectedExerciseType[exerciseType[index]]==true?
+              fullBodyIsSelected==false && selectedExerciseType[exerciseType[index]]==true?
               Colors.black:Colors.white
           ),
         boxShadow:[

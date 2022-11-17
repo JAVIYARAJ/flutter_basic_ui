@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:traning_app/pages/exercise_focur_area.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:traning_app/pages/welcome/exercise_focur_area_page.dart';
 import 'package:traning_app/widget/reusable_button.dart';
+import 'package:get/get.dart';
 
 
-import '../constant.dart';
-import '../constant/user_type.dart';
+import '../../constant/constant.dart';
+import '../../model/user_type.dart';
+import '../../state/state_controller.dart';
 
 class GenderIdentifyPage extends StatefulWidget {
   const GenderIdentifyPage({Key? key}) : super(key: key);
+
+
 
   @override
   State<GenderIdentifyPage> createState() => _GenderIdentifyPageState();
@@ -16,6 +21,7 @@ class GenderIdentifyPage extends StatefulWidget {
 class _GenderIdentifyPageState extends State<GenderIdentifyPage> {
 
   var selectedUserType;
+
 
   @override
   void initState() {
@@ -64,9 +70,17 @@ class _GenderIdentifyPageState extends State<GenderIdentifyPage> {
                       ]
                   ),
                 ),
+
                 ReusableNextButton(buttonName: "NEXT",onTap:(){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const ExerciseFocusArea()));
-                }),
+                  //Navigator.push(context, MaterialPageRoute(builder: (context)=>const ExerciseFocusArea()));
+                  if(selectedUserType!=null){
+                    Get.toNamed("/exercise_focus_area_page",arguments: {
+                      "userType":selectedUserType,
+                    });
+                  }else{
+                    Get.snackbar("Alert","Please Select Gender",snackPosition: SnackPosition.TOP,backgroundColor: Colors.blueAccent.withOpacity(0.4));
+                  }
+                },bottomMargin: 10,topMargin: 0,),
               ],
             ),
           ),

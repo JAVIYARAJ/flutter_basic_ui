@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:traning_app/user.dart';
+import 'package:traning_app/model/user.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoInfo extends StatefulWidget {

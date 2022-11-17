@@ -10,3 +10,9 @@ enum ExerciseType{
   ABS,
   LEG
 }
+
+enum ExerciseGoal{
+  loseWeight,
+  buildMuscle,
+  keepFit
+}

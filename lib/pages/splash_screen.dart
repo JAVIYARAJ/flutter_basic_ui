@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:traning_app/auth/auth_dashboard.dart';
 import 'package:traning_app/auth/auth_page.dart';
+import 'package:traning_app/pages/welcome/gender_selection_page.dart';
 import 'package:traning_app/pages/main_page.dart';
 import 'package:traning_app/auth/signUp_page.dart';
 class SplashScreen extends StatefulWidget {
@@ -25,10 +26,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _timerFunction(){
     Timer(const Duration(seconds: 5),(){
-      // Get.to(()=>const MainPage(),
-      //     transition: Transition.fade,duration: const Duration(seconds: 2));
-
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const AuthDashboard()));
+      Get.toNamed("/gender_selection_page");
+      //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const AuthDashboard()));
     });
   }
 

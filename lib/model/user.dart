@@ -1,9 +1,9 @@
-class User{
+class Temp{
   final String name;
   final String email;
   final String password;
 
-  User({
+  Temp({
     required this.name,
     required this.email,
     required this.password});
@@ -14,8 +14,8 @@ class User{
     "password":password
   };
 
-  static User fromJson(Map<String,dynamic> json)=>
-      User(
+  static Temp fromJson(Map<String,dynamic> json)=>
+      Temp(
           name: json["name"],
           email: json["email"],
           password: json["password"]);

@@ -4,15 +4,17 @@ class ReusableNextButton extends StatelessWidget {
 
   String? buttonName;
   VoidCallback? onTap;
+  double? bottomMargin;
+  double? topMargin;
 
-  ReusableNextButton({this.buttonName,this.onTap});
+  ReusableNextButton({this.buttonName,this.onTap,this.bottomMargin,this.topMargin});
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 50),
+        margin: EdgeInsets.only(bottom: bottomMargin!,top: topMargin!),
         height: 50,
         width: 200,
         decoration: BoxDecoration(
